@@ -81,9 +81,9 @@ Sample predictions are available in predictions/.
 
 Final Test Mean IoU: 0.2276
 
-## ▶️ How to Run
+## How to Run
 
-### 1️⃣ Install Dependencies
+### Install Dependencies
 
 ```bash
 conda create -n offroad python=3.9
@@ -91,13 +91,13 @@ conda activate offroad
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Train the Model
+###  Train the Model
 
 ```bash
 python train_segmentation.py
 ```
 
-### 3️⃣ Run Evaluation
+###  Run Evaluation
 
 ```bash
 python test_segmentation.py
