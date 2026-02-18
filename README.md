@@ -15,15 +15,15 @@ The challenge involves:
 *  Strict time constraints
 
 
-**Methodology**
+## Methodology
 
-Model Architecture
+**Model Architecture**
 * Pretrained DINOv2 backbone for feature extraction
 * Custom segmentation head for pixel-level classification
 * Cross-Entropy Loss
 * Adam optimizer
 
-Training Configuration (Final Model)
+**Training Configuration (Final Model)**
 * Batch Size: 2
 * Learning Rate: 1e-4
 * Epochs: 10
@@ -32,7 +32,7 @@ Training Configuration (Final Model)
 The DINOv2 backbone provides strong self-supervised visual features, enabling improved generalization with limited labeled data.
 
 
-**Experimental Results**
+## Experimental Results
 Multiple training configurations were evaluated to optimize performance.
 
 |Configuration	            |     Val IoU|	Test IoU
@@ -41,14 +41,17 @@ Multiple training configurations were evaluated to optimize performance.
 12 Epochs (Batch=4)	        |  0.2834	   |0.2181
 20 Epochs (LR=5e-5)         |	0.2486	   |0.1977
 
-Key Insight
-The model achieved optimal generalization at 10 epochs.
-Extending training beyond this point reduced test IoU, indicating mild overfitting.
-This highlights the importance of early stopping when using strong pretrained backbones on limited datasets.
-The 10-epoch configuration was selected as the final submission model.
+##  Key Insight
+The model achieved optimal generalization at **10 epochs**.  
+Extending training beyond this point reduced the test IoU, indicating mild overfitting to the training distribution.
+
+This experiment highlights the importance of **early stopping**, especially when fine-tuning strong pretrained backbones on relatively limited datasets.
+
+Based on comparative evaluation across multiple configurations, the **10-epoch model** was selected as the final submission due to its superior test performance.
 
 
-**Training Behavior**
+
+## Training Behavior
 *  Training and validation loss decreased steadily.
 *  Minimal gap between training and validation metrics.
 *  Overfitting observed after extended training (12+ epochs).
@@ -57,7 +60,7 @@ The 10-epoch configuration was selected as the final submission model.
 Training curves and per-class metrics are available in the train_stats/ directory.
 
 
-**Challenges Faced**
+## Challenges Faced
 1. Limited GPU memory (4GB VRAM)
 2. Texture similarity between classes (e.g., logs vs rocks)
 3. Domain shift between training and test environments
@@ -65,7 +68,7 @@ Training curves and per-class metrics are available in the train_stats/ director
 5. Fine-grained object boundary detection difficulties
 
 
-**Failure Case Analysis**
+## Failure Case Analysis
 *  The model struggles with:
 *  Fine-grained vegetation details
 *  Small object boundaries
@@ -75,7 +78,7 @@ Training curves and per-class metrics are available in the train_stats/ director
 Sample predictions are available in predictions/.
 
 
-**Final Model**
+## Final Model
   * Final submission model:
     segmentation_head_10epoch_best.pth
 
@@ -106,7 +109,7 @@ python test_segmentation.py
 Evaluation outputs will be saved in the `predictions/` folder.
 
 
-**Future Work**
+## Future Work
 * Data augmentation (random flips, rotations, color jitter)
 * Class-balanced or focal loss
 * Higher resolution training
@@ -114,7 +117,7 @@ Evaluation outputs will be saved in the `predictions/` folder.
 * Fine-tuning backbone layers with larger GPU
 
 
-**Conclusion**
+## Conclusion
 
 This project demonstrates the feasibility of deep learning-based terrain segmentation using pretrained visual backbones under limited hardware and time constraints.
 Careful experimentation revealed that optimal generalization occurred at 10 epochs, emphasizing the importance of validation-based model selection and early stopping.
